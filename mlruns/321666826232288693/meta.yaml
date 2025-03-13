@@ -1,0 +1,6 @@
+artifact_location: file:///Users/anuragtrivedi/Desktop/Brain_stroke_predictionr/mlruns/321666826232288693
+creation_time: 1741898715342
+experiment_id: '321666826232288693'
+last_update_time: 1741898715342
+lifecycle_stage: active
+name: classification-pipeline

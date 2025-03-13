@@ -1,0 +1,15 @@
+artifact_uri: file:///Users/anuragtrivedi/Desktop/Brain_stroke_predictionr/mlruns/321666826232288693/2d1e3a1282d04a08a2fa8566b00bd2e2/artifacts
+end_time: 1741898758661
+entry_point_name: ''
+experiment_id: '321666826232288693'
+lifecycle_stage: active
+run_id: 2d1e3a1282d04a08a2fa8566b00bd2e2
+run_name: big-rook-685
+run_uuid: 2d1e3a1282d04a08a2fa8566b00bd2e2
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1741898715404
+status: 3
+tags: []
+user_id: anuragtrivedi

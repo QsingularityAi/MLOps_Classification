@@ -1,0 +1,14 @@
+aliases: []
+creation_timestamp: 1741898758414
+current_stage: None
+description: null
+last_updated_timestamp: 1741898758414
+name: stroke-prediction-model
+run_id: 2d1e3a1282d04a08a2fa8566b00bd2e2
+run_link: null
+source: file:///Users/anuragtrivedi/Desktop/Brain_stroke_predictionr/mlruns/321666826232288693/2d1e3a1282d04a08a2fa8566b00bd2e2/artifacts/model
+status: READY
+status_message: null
+storage_location: file:///Users/anuragtrivedi/Desktop/Brain_stroke_predictionr/mlruns/321666826232288693/2d1e3a1282d04a08a2fa8566b00bd2e2/artifacts/model
+user_id: null
+version: 1

@@ -1,0 +1,17 @@
+global:
+  scrape_interval: 15s
+  evaluation_interval: 15s
+
+scrape_configs:
+  - job_name: 'stroke-prediction-api'
+    metrics_path: '/metrics'
+    static_configs:
+      - targets: ['stroke-api:8000']
+  
+  - job_name: 'model-metrics'
+    metrics_path: '/model-metrics'
+    static_configs:
+      - targets: ['model-monitor:8001']
+
+rule_files:
+  - 'alert_rules.yml'

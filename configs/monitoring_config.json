@@ -1,0 +1,10 @@
+{
+    "reference_data_path": "data/processed/reference_data.csv",
+    "test_data_path": "data/processed/test_data.csv",
+    "model_path": "models/latest_model.joblib",
+    "check_interval": 300,
+    "prometheus_endpoint": "http://localhost:9091/metrics/job/stroke-prediction",
+    "drift_threshold": 0.05,
+    "performance_threshold": 0.90,
+    "log_dir": "logs"
+}

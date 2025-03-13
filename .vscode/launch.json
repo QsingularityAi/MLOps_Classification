@@ -1,0 +1,63 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "Python: Current File",
+            "type": "python",
+            "request": "launch",
+            "program": "${file}",
+            "console": "integratedTerminal",
+            "justMyCode": true,
+            "env": {
+                "PYTHONPATH": "${workspaceFolder}"
+            }
+        },
+        {
+            "name": "Python: API Service",
+            "type": "python",
+            "request": "launch",
+            "module": "uvicorn",
+            "args": [
+                "src.api.app:app",
+                "--reload",
+                "--port",
+                "8000"
+            ],
+            "jinja": true,
+            "justMyCode": true,
+            "env": {
+                "PYTHONPATH": "${workspaceFolder}",
+                "MODEL_PATH": "models/latest_model.joblib"
+            }
+        },
+        {
+            "name": "Python: Training Pipeline",
+            "type": "python",
+            "request": "launch",
+            "program": "${workspaceFolder}/src/pipeline/train_pipeline.py",
+            "args": [
+                "--config",
+                "configs/model_config.json"
+            ],
+            "console": "integratedTerminal",
+            "justMyCode": true,
+            "env": {
+                "PYTHONPATH": "${workspaceFolder}"
+            }
+        },
+        {
+            "name": "Python: Monitoring Pipeline",
+            "type": "python",
+            "request": "launch",
+            "program": "${workspaceFolder}/src/pipeline/monitoring_pipeline.py",
+            "args": [
+                "--push-to-prometheus"
+            ],
+            "console": "integratedTerminal",
+            "justMyCode": true,
+            "env": {
+                "PYTHONPATH": "${workspaceFolder}"
+            }
+        }
+    ]
+}

@@ -1,0 +1,29 @@
+groups:
+- name: stroke-prediction-alerts
+  rules:
+  - alert: HighErrorRate
+    expr: rate(stroke_prediction_requests_total{status="error"}[5m]) / rate(stroke_prediction_requests_total[5m]) > 0.05
+    for: 2m
+    labels:
+      severity: critical
+    annotations:
+      summary: "High error rate in stroke prediction API"
+      description: "Error rate is {{ $value | humanizePercentage }} for the last 5 minutes"
+
+  - alert: ModelDrift
+    expr: model_drift_score > 0.1
+    for: 5m
+    labels:
+      severity: warning
+    annotations:
+      summary: "Potential model drift detected"
+      description: "Model drift score is {{ $value }}, exceeding threshold of 0.1"
+
+  - alert: LowAccuracy
+    expr: model_accuracy < 0.90
+    for: 10m
+    labels:
+      severity: warning
+    annotations:
+      summary: "Model accuracy below threshold"
+      description: "Model accuracy is {{ $value }}, below threshold of 0.90"
