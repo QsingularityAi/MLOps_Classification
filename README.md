@@ -112,56 +112,19 @@ A REST API is provided to serve the trained stroke prediction model, making it a
 *   **Functionality**: The API exposes an endpoint that accepts patient data in JSON format as input and returns the model's stroke prediction as a JSON response.
 *   **Usage**:  Detailed instructions on how to interact with the API, including request formats and response examples, can be found in the `src/api/README.md` file *(Note: API documentation file needs to be created)*.
 
-## Setup
+## Installation
 
 To set up the project and run it locally, follow these steps:
 
 1.  **Clone the repository** (if you haven't already):
     ```bash
-    git clone [repository-url]
-    cd Brain_stroke_predictionr
+    git clone https://github.com/QsingularityAi/MLOps_Classification.git
+    cd MLOps_Classification
     ```
-    *(Replace `[repository-url]` with the actual repository URL)*
 
 2.  **Navigate to the project directory**:
     ```bash
-    cd Brain_stroke_predictionr
-    ```
-
-3.  **Create a virtual environment** (recommended):
-    ```bash
-    python3 -m venv venv
-    ```
-
-4.  **Activate the virtual environment**:
-    *   **On macOS/Linux**:
-        ```bash
-        source venv/bin/activate
-        ```
-    *   **On Windows**:
-        ```bash
-        venv\Scripts\activate
-        ```
-
-5.  **Install dependencies**:
-    ```bash
-    pip install -r requirements.txt
-    ```
-
-## Installation
-
-To set up the project environment, follow these steps:
-
-1.  **Clone the repository:**
-    ```bash
-    git clone [repository-url]
-    cd Brain_stroke_predictionr
-    ```
-    *(Replace `[repository-url]` with the actual repository URL)*
-
-2.  **Navigate to the project directory**:
-    ```bash
-    cd Brain_stroke_predictionr
+    cd MLOps_Classification
     ```
 
 3.  **Create a virtual environment** (recommended):
