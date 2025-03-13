@@ -1,4 +1,4 @@
-# Brain Stroke Prediction Project
+# End to End Machine Learning Pipeline for Brain Stroke Prediction classfication Project
 
 This project is aimed at predicting the likelihood of brain stroke based on patient data.
 
@@ -230,10 +230,10 @@ Before running the notebook, ensure you have Jupyter installed:
 
 1. **Clone the repository:**
    ```bash
-   git clone [repository-url]
-   cd Brain_stroke_predictionr
+   git clone https://github.com/QsingularityAi/MLOps_Classification.git
+   cd MLOps_Classification
    ```
-   (Replace `[repository-url]` with the actual repository URL)
+  
 
 2. **Set up Python environment:**
    It is recommended to use a virtual environment to manage project dependencies. You can create and activate a virtual environment using `venv` or `conda`:
@@ -260,7 +260,7 @@ Before running the notebook, ensure you have Jupyter installed:
 The project repository is organized as follows:
 
 ```
-Brain_stroke_predictionr/
+MLOps_Classification/
 ├── configs/                     # Configuration files for models and monitoring
 ├── data/                        # Dataset and data related files
 ├── docker/                      # Docker configurations for containerization
@@ -308,15 +308,15 @@ Contributions to the Brain Stroke Prediction Project are welcome! If you want to
 
 ## Contact
 
-For questions or issues related to this project, please contact [Your Name/Organization] at [Your Email or Contact Link].
+For questions or issues related to this project, please contact me.
 
 ## License
 
-This project is open-source and available under the [Specify License, e.g., MIT License]. You are free to use, modify, and distribute this project for commercial and non-commercial purposes.  See the `LICENSE` file for the full license text.  *(Note: A LICENSE file needs to be added to the repository)*
+This project is open-source and available under the `GPL-3.0 license`. You are free to use, modify, and distribute this project for commercial and non-commercial purposes.  See the `LICENSE` file for the full license text.
 
 ## Contributing
 
-We welcome contributions to the Brain Stroke Prediction Project!  If you're interested in contributing, please take the following steps:
+We welcome contributions to the Full End to End ML Based Brain Stroke Prediction Project!  If you're interested in contributing, please take the following steps:
 
 1.  **Fork the Repository:** Start by forking the project repository to your own GitHub account.
 2.  **Create a Branch:**  Create a new branch for your contribution (e.g., `feature/new-feature` or `bugfix/fix-issue`).
