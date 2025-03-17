@@ -3,6 +3,7 @@ import numpy as np
 from sklearn.model_selection import train_test_split
 import os
 import logging
+from imblearn.over_sampling import SMOTE
 
 logging.basicConfig(level=logging.INFO, 
                    format='%(asctime)s - %(name)s - %(levelname)s - %(message)s')
@@ -72,6 +73,16 @@ def split_data(data, test_size=0.2, val_size=0.1, random_state=42):
     # First split: separate test set
     X = data.drop('stroke', axis=1) 
     y = data['stroke']
+    
+    # Apply SMOTE to the training data
+    smote = SMOTE(random_state=42)
+    X_smote, y_smote = smote.fit_resample(X, y)
+
+    df_smote = pd.DataFrame(X_smote, columns=X.columns)
+    df_smote['stroke'] = y_smote
+
+    X = df_smote.drop('stroke', axis=1) # Features
+    y = df_smote['stroke']
     
     X_temp, X_test, y_temp, y_test = train_test_split(
         X, y, test_size=test_size, random_state=random_state, stratify=y)
