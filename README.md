@@ -1,6 +1,18 @@
-# End to End Machine Learning Pipeline for Brain Stroke Prediction classfication Project
+# End to End Machine Learning Pipeline for 🧠 Brain Stroke Prediction classfication Project
 
-This project is aimed at predicting the likelihood of brain stroke based on patient data.
+<div align="center">
+
+![Brain Stroke Prediction](https://via.placeholder.com/800x200?text=Brain+Stroke+Prediction+Project)
+
+[![Python](https://img.shields.io/badge/Python-3.8+-blue.svg)](https://www.python.org/downloads/)
+[![scikit-learn](https://img.shields.io/badge/scikit--learn-Latest-orange.svg)](https://scikit-learn.org/stable/)
+[![Flask](https://img.shields.io/badge/Flask-Latest-lightgrey.svg)](https://flask.palletsprojects.com/)
+[![MLflow](https://img.shields.io/badge/MLflow-Latest-blue.svg)](https://mlflow.org/)
+[![License](https://img.shields.io/badge/License-MIT-green.svg)](LICENSE)
+
+*A machine learning solution for predicting brain stroke risk using patient data*
+
+</div>
 
 ## Table of Contents
 - [Introduction](#introduction)
@@ -236,7 +248,7 @@ To set up the project and run it locally, follow these steps:
     pip install -r requirements.txt
     ```
 
-## Usage
+## 🚀 Usage
 
 ### 1. Run the API
 
@@ -246,8 +258,35 @@ To set up the project and run it locally, follow these steps:
     ```
     The API will be running at `http://localhost:8000`.
 
-*   **API Documentation**:
-    For detailed information on API endpoints, request formats, and response examples, refer to the `src/api/README.md` file. *(Note: API documentation file needs to be created)*
+    
+### Example API Request
+
+```python
+import requests
+import json
+
+url = "http://localhost:5000/predict"
+
+patient_data = {
+    "gender": "Male",
+    "age": 67,
+    "hypertension": 1,
+    "heart_disease": 1,
+    "ever_married": "Yes",
+    "work_type": "Private",
+    "Residence_type": "Urban",
+    "avg_glucose_level": 228.69,
+    "bmi": 36.6,
+    "smoking_status": "formerly smoked"
+}
+
+response = requests.post(url, json=patient_data)
+prediction = response.json()
+
+print(f"Stroke Probability: {prediction['stroke_probability']}")
+print(f"Risk Category: {prediction['risk_category']}")
+```
+
 
 ### 2. Run the Monitoring Stack (Prometheus & Grafana)
 
