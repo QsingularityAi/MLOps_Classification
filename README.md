@@ -34,6 +34,12 @@
 
 **Stroke is a leading cause of death and disability worldwide.**  Rapid and accurate prediction of stroke risk is essential for enabling preventative measures and timely medical intervention. This project aims to develop a machine learning-based stroke prediction system to assist healthcare professionals in identifying individuals at high risk of stroke.
 
+<div align="center">
+  
+![Stroke Risk Factors](https://via.placeholder.com/600x300?text=Stroke+Risk+Factors+Visualization)
+
+</div>
+
 By utilizing patient data and applying machine learning algorithms, this project seeks to:
 
 *   **Improve Stroke Risk Assessment:** Provide a more accurate and data-driven approach to assess stroke risk compared to traditional methods.
@@ -93,18 +99,27 @@ This project leverages a range of technologies and tools, including:
 
 The dataset for this project is `brain.csv`, located in the `data/` directory. It contains anonymized patient data with the following features:
 
-*   **id**: Unique identifier for each patient.
-*   **gender**: Patient's gender (Male, Female, Other).
-*   **age**: Patient's age in years.
-*   **hypertension**: Whether the patient has hypertension (0 or 1).
-*   **heart_disease**: Whether the patient has heart disease (0 or 1).
-*   **ever_married**: Whether the patient has ever been married (No or Yes).
-*   **work_type**: Type of work the patient does (e.g., Private, Self-employed, Govt_job).
-*   **Residence_type**: Type of residence (Rural or Urban).
-*   **avg_glucose_level**: Average glucose level in blood.
-*   **bmi**: Body mass index.
-*   **smoking_status**: Patient's smoking status (e.g., never smoked, formerly smoked, smokes).
-*   **stroke (Target Variable)**: Whether the patient had a stroke (1) or not (0).
+<div align="center">
+  
+![Data Distribution](https://via.placeholder.com/700x350?text=Data+Distribution+Visualization)
+
+</div>
+
+| Feature | Description | Type |
+|---------|-------------|------|
+| id | Unique identifier for each patient | Integer |
+| gender | Patient's gender (Male, Female, Other) | Categorical |
+| age | Patient's age in years | Numerical |
+| hypertension | Whether the patient has hypertension (0 or 1) | Binary |
+| heart_disease | Whether the patient has heart disease (0 or 1) | Binary |
+| ever_married | Whether the patient has ever been married (No or Yes) | Categorical |
+| work_type | Type of work (e.g., Private, Self-employed, Govt_job) | Categorical |
+| Residence_type | Type of residence (Rural or Urban) | Categorical |
+| avg_glucose_level | Average glucose level in blood | Numerical |
+| bmi | Body mass index | Numerical |
+| smoking_status | Patient's smoking status | Categorical |
+| stroke | **(Target)** Whether the patient had a stroke (1) or not (0) | Binary |
+
 
 ## Model
 
