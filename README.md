@@ -41,13 +41,13 @@ The Brain Stroke Prediction project is structured as an end-to-end machine learn
     *   Cleaning and preprocessing the data to handle missing values, inconsistencies, and prepare it for feature engineering and model training.
     *   Data preprocessing scripts can be found in `src/data_processing/`.
 
-3.  **Feature Engineering**:
+3.  **Feature Engineering**:(optional)(not using currently)
     *   Creating new features from existing data or transforming features to improve model performance.
     *   This may include scaling numerical features, encoding categorical variables, and generating interaction features.
     *   Feature engineering scripts are located in `src/feature_engineering/`.
 
 4.  **Model Development and Training**:
-    *   Selecting an appropriate machine learning model for stroke prediction for demo notenook I am using, Random Forest, XGBoosting model.
+    *   Selecting an appropriate machine learning model for stroke prediction for demo notenook I am using, Random Forest, XGBoosting model. but in final version we will use random forest which is more accurate prediction.
     *   Training the model using the preprocessed data and engineered features.
     *   Utilizing MLflow for experiment tracking and model management to ensure reproducibility and facilitate model comparison.
     *   Model training scripts are available in `src/model/train.py`.
