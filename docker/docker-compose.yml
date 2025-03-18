@@ -10,7 +10,7 @@ services:
     volumes:
       - ../models:/app/models
     environment:
-      - MODEL_PATH=models/latest_model.joblib
+      - MODEL_PATH=models/stroke_prediction_model_20250318_122920.joblib
     networks:
       - monitoring-network
     restart: always
@@ -25,7 +25,7 @@ services:
       - ../models:/app/models
       - ../data:/app/data
     environment:
-      - MODEL_PATH=models/latest_model.joblib
+      - MODEL_PATH=models/stroke_prediction_model_20250318_122920.joblib
       - REFERENCE_DATA_PATH=data/processed/reference_data.csv
       - TEST_DATA_PATH=data/processed/test_data.csv
       - CHECK_INTERVAL=300

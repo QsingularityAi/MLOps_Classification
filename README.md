@@ -47,7 +47,7 @@ The Brain Stroke Prediction project is structured as an end-to-end machine learn
     *   Feature engineering scripts are located in `src/feature_engineering/`.
 
 4.  **Model Development and Training**:
-    *   Selecting an appropriate machine learning model for stroke prediction (e.g., Logistic Regression, Random Forest, Gradient Boosting Machines).
+    *   Selecting an appropriate machine learning model for stroke prediction for demo notenook I am using, Random Forest, XGBoosting model.
     *   Training the model using the preprocessed data and engineered features.
     *   Utilizing MLflow for experiment tracking and model management to ensure reproducibility and facilitate model comparison.
     *   Model training scripts are available in `src/model/train.py`.
@@ -109,7 +109,97 @@ A REST API is provided to serve the trained stroke prediction model, making it a
 *   **Framework**: Built using Flask, a lightweight and flexible Python web framework.
 *   **Code Location**: API application code is located in `src/api/app.py`.
 *   **Functionality**: The API exposes an endpoint that accepts patient data in JSON format as input and returns the model's stroke prediction as a JSON response.
-*   **Usage**:  Detailed instructions on how to interact with the API, including request formats and response examples, can be found in the `src/api/README.md` file *(Note: API documentation file needs to be created)*.
+*   **Usage**:  Detailed instructions on how to interact with the API, including request formats and response examples.
+
+# Stroke Prediction API - Production Deployment Guide
+
+This guide outlines the steps to deploy and use the Stroke Prediction API in a production environment using Docker and Docker Compose.
+
+## 1. Building the Docker Image for Production
+
+To build the Docker image for production, navigate to the project root directory in your terminal and run the following command:
+
+```bash
+docker-compose -f docker/docker-compose.yml build
+```
+
+This command uses the `docker-compose.yml` file to build the Docker images for all services defined in the file, including the `stroke-api`, `model-monitor`, `prometheus`, and `grafana` services. Docker Compose will use the `Dockerfile` in the `docker/` directory to build the `stroke-api` image, incorporating all necessary dependencies and the application code. This command creates production-ready Docker images.
+
+## 2. Running the API in Production
+
+To run the API in detached mode (in the background), use the following command in the project root directory:
+
+```bash
+docker-compose -f docker/docker-compose.yml up -d
+```
+
+The `-d` flag runs the containers in detached mode, meaning they will run in the background. To verify that the containers are running, you can use:
+
+```bash
+docker-compose -f docker/docker-compose.yml ps
+```
+
+This command will show the status of all services defined in your `docker-compose.yml` file, confirming that the API and its related services are running.
+
+## 3. Accessing the Prediction API
+
+Once the Docker containers are running, the Stroke Prediction API will be accessible at `http://localhost:8000/predict`. You can send prediction requests using `curl` or any other HTTP client.
+
+Here's an example `curl` command to send a prediction request:
+
+```bash
+curl -X POST "http://localhost:8000/predict" \
+  -H "Content-Type: application/json" \
+  -d '{
+      "gender": "Male",
+      "age": 65.0,
+      "hypertension": 1,
+      "heart_disease": 0,
+      "ever_married": "Yes",
+      "work_type": "Private",
+      "residence_type": "Urban",
+      "avg_glucose_level": 100.0,
+      "bmi": 28.0,
+      "smoking_status": "formerly smoked"
+    }'
+```
+
+This command sends a POST request to the `/predict` endpoint with patient data in JSON format. The API will respond with a JSON object containing the stroke probability and prediction.
+
+## 4. Monitoring the API
+
+The production setup includes monitoring capabilities using Prometheus and Grafana:
+
+*   **Prometheus Metrics:** Access Prometheus metrics at `http://localhost:9090/metrics`. Prometheus collects metrics from the `stroke-api` and `model-monitor` services, providing insights into API performance and model behavior.
+*   **Grafana Dashboards:** Access Grafana dashboards at `http://localhost:3001` (or `http://localhost:<your_grafana_port>`). Grafana provides pre-configured dashboards for visualizing the collected metrics. Key dashboards include:
+    *   **Prediction API Dashboard:**  Visualizes API request rates, latency, and prediction probabilities.
+    *   **Model Performance Dashboard:**  Monitors model accuracy, F1-score, ROC AUC, and other performance metrics.
+    *   **Data Drift Dashboard:** Tracks data drift metrics to detect potential data quality issues.
+    *   **Model Explainability Dashboard:** (If implemented) Provides insights into model predictions and feature importance.
+
+These dashboards are crucial for monitoring the health and performance of your production API.
+
+## 5. Scaling the API
+
+To handle increased traffic, you can scale the Stroke Prediction API horizontally by increasing the number of `stroke-api` containers. Use the `docker-compose scale` command:
+
+
+```bash
+docker-compose -f docker/docker-compose.yml scale stroke-api=3
+```
+
+This command will scale the `stroke-api` service to 3 instances. Docker Compose will automatically handle load balancing between these instances. For more advanced load balancing in a production environment, you might consider using a dedicated load balancer service in front of your Docker containers.
+
+## 6. Updating the Model
+
+To update the model in production, follow these steps:
+
+1.  **Retrain the model:** Run the training pipeline using: `python src/pipeline/train_pipeline.py`. This will train a new model and save it as `latest_model.joblib` in the `models/` directory.
+2.  **Rebuild Docker images:** After retraining, rebuild the Docker images to include the new model: `docker-compose -f docker/docker-compose.yml build`.
+3.  **Redeploy the API:**  Restart the Docker containers to apply the changes and load the new model: `docker-compose -f docker/docker-compose.yml up -d`.
+
+This process ensures that your production API is updated with the latest trained model.
+
 
 ## Installation
 
@@ -154,7 +244,7 @@ To set up the project and run it locally, follow these steps:
     ```bash
     python src/api/app.py
     ```
-    The API will be running at `http://localhost:5000`.
+    The API will be running at `http://localhost:8000`.
 
 *   **API Documentation**:
     For detailed information on API endpoints, request formats, and response examples, refer to the `src/api/README.md` file. *(Note: API documentation file needs to be created)*
@@ -162,9 +252,9 @@ To set up the project and run it locally, follow these steps:
 ### 2. Run the Monitoring Stack (Prometheus & Grafana)
 
 *   **Start with Docker Compose**:
-    Ensure Docker and Docker Compose are installed on your system. Navigate to the `docker/` directory and run:
+    Ensure Docker and Docker Compose are installed on your system and run:
     ```bash
-    docker-compose up -d
+    docker-compose -f docker/docker-compose.yml up --build
     ```
     This command starts Prometheus and Grafana in detached mode.
 
@@ -234,11 +324,9 @@ MLOps_Classification/
 │   ├── api/                     # API application using Flask
 │   ├── data_processing/        # Scripts for data ingestion and preprocessing
 │   ├── evaluation/             # Scripts for model evaluation
-│   ├── feature_engineering/    # Scripts for feature engineering (if any)
 │   ├── model/                  # Scripts for model training and MLflow integration
 │   ├── monitoring/             # Scripts for metrics exporter
 │   └── pipeline/               # Scripts for defining pipelines (training, monitoring)
-├── tests/                       # Test scripts (if any)
 ├── README.md                    # Project README file
 ├── requirements.txt             # Python dependencies
 └── setup.py                     # Setup script for packaging

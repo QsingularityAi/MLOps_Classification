@@ -12,7 +12,7 @@ sys.path.append(os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(
 from src.data_processing.ingest import (load_data, check_data_quality, 
                                       preprocess_data, split_data, save_splits)
 from src.model.train import load_config, train_model, save_model
-from src.evaluation.evaluate import evaluate_model, save_evaluation_results
+from src.evaluation.evaluate import evaluate_model, save_evaluation_results, plot_evaluation_results
 from src.model.mlflow_integration import setup_mlflow, log_model_training, register_model
 
 logging.basicConfig(level=logging.INFO, 
@@ -36,6 +36,7 @@ def run_pipeline(config_path):
     processed_data_dir = config.get("processed_data_dir", "data/processed")
     model_dir = config.get("model_dir", "models")
     results_dir = config.get("results_dir", "results")
+    plot_output_dir = os.path.join(results_dir, "plots") # ADDED LINE
     model_params = config.get("model_params", None)
     test_size = config.get("test_size", 0.2)
     val_size = config.get("val_size", 0.1)
@@ -45,6 +46,7 @@ def run_pipeline(config_path):
     os.makedirs(processed_data_dir, exist_ok=True)
     os.makedirs(model_dir, exist_ok=True)
     os.makedirs(results_dir, exist_ok=True)
+    os.makedirs(plot_output_dir, exist_ok=True) # ADDED LINE
     
     # 1. Load data
     logger.info(f"Loading data from {data_path}")
@@ -106,6 +108,9 @@ def run_pipeline(config_path):
     timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
     results_path = os.path.join(results_dir, f"evaluation_results_{timestamp}.json")
     save_evaluation_results(evaluation, results_path)
+    
+    # 12. Plot evaluation results (optional) # UNCOMMENTED
+    plot_evaluation_results(evaluation, plot_output_dir) # UNCOMMENTED
     
     # Calculate elapsed time
     elapsed_time = datetime.now() - start_time
